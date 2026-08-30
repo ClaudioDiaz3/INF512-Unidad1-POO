@@ -1,0 +1,57 @@
+using System;
+
+namespace INF512.Unidad1
+{
+    public class CuentaBancaria
+    {
+        // Atributos privados (Encapsulamiento)
+        private string _numeroCuenta;
+        private string _titular;
+        private decimal _balance;
+
+        // Propiedades públicas para lectura controlada
+        public string NumeroCuenta => _numeroCuenta;
+        public string Titular => _titular;
+        public decimal Balance => _balance;
+
+        // Constructor
+        public CuentaBancaria(string numeroCuenta, string titular, decimal balanceInicial)
+        {
+            if (balanceInicial < 0)
+                throw new ArgumentException("El balance inicial no puede ser negativo.");
+
+            _numeroCuenta = numeroCuenta;
+            _titular = titular;
+            _balance = balanceInicial;
+        }
+
+        // Métodos de comportamiento
+        public void Depositar(decimal monto)
+        {
+            if (monto <= 0)
+                throw new ArgumentException("El monto a depositar debe ser mayor a 0.");
+
+            _balance += monto;
+            Console.WriteLine($"Depósito exitoso: +${monto}. Nuevo balance: ${_balance}");
+        }
+
+        public bool Retirar(decimal monto)
+        {
+            if (monto <= 0)
+            {
+                Console.WriteLine("Monto de retiro inválido.");
+                return false;
+            }
+
+            if (monto > _balance)
+            {
+                Console.WriteLine($"Fondos insuficientes. Balance actual: ${_balance}");
+                return false;
+            }
+
+            _balance -= monto;
+            Console.WriteLine($"Retiro exitoso: -${monto}. Nuevo balance: ${_balance}");
+            return true;
+        }
+    }
+}
