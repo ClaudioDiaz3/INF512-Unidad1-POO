@@ -1,0 +1,14 @@
+using System;
+
+namespace INF512.Unidad1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            CuentaBancaria miCuenta = new CuentaBancaria("CTA-101", "Wilder Santana", 500.00m);
+            miCuenta.Depositar(250.00m);
+            miCuenta.Retirar(100.00m);
+        }
+    }
+}
